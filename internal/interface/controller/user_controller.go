@@ -3,13 +3,13 @@ package controller
 import (
 	"net/http"
 
-	"github.com/ryicoh/clean-arch/internal/infrastructure/web"
+	"github.com/ryicoh/clean-arch/internal/interface/web/appcontext"
 	"github.com/ryicoh/clean-arch/internal/usecase"
 )
 
 type (
 	UserController interface {
-		GetUsers(web.Context) (code int, i interface{}, err error)
+		GetUsers(appcontext.Context) (code int, i interface{}, err error)
 	}
 
 	userController struct {
@@ -21,7 +21,7 @@ func NewUserController(userUsecase usecase.UserUsecase) UserController {
 	return &userController{userUsecase: userUsecase}
 }
 
-func (c *userController) GetUsers(ctx web.Context) (code int, i interface{}, err error) {
+func (c *userController) GetUsers(ctx appcontext.Context) (code int, i interface{}, err error) {
 	offset, err := ctx.GetQueryOffset()
 	if err != nil {
 		return http.StatusBadRequest, nil, err

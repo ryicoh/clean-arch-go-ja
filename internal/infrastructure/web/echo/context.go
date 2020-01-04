@@ -1,8 +1,8 @@
 package echo
 
 import (
-	"errors"
-	"strconv"
+	"mime/multipart"
+	"net/http"
 
 	"github.com/labstack/echo"
 	"github.com/ryicoh/clean-arch/internal/infrastructure/conf"
@@ -17,16 +17,18 @@ func (c *context) GetConfig() conf.Config {
 	return c.cnf
 }
 
-func (c *context) GetQueryOffset() (int, error) {
-	str := c.ctx.QueryParam("Offset")
-	if str == "" {
-		return 0, errors.New("Query parameter 'Offset' is empty")
-	}
+func (c *context) GetQueryParam(query string) string {
+	return c.ctx.QueryParam(query)
+}
 
-	offset, err := strconv.Atoi(str)
-	if err != nil {
-		return 0, errors.New("Query parameter 'Offset' is invalid")
-	}
+func (c *context) Bind(i interface{}) error {
+	return c.Bind(i)
+}
 
-	return offset, nil
+func (c *context) GetRequest() *http.Request {
+	return c.ctx.Request()
+}
+
+func (c *context) GetMultipartForm() (*multipart.Form, error) {
+	return c.ctx.MultipartForm()
 }

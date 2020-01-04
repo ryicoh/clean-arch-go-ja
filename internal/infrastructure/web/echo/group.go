@@ -34,5 +34,14 @@ func (g *group) GET(path string, handler web.Handler) {
 }
 
 func (g *group) POST(path string, handler web.Handler) {
-	g.server.POST(path, handler)
+	g.group.POST(path,
+		func(c echo.Context) error {
+			code, res, err := handler(g.newContext(c))
+			if err != nil {
+				return echo.NewHTTPError(code, err.Error())
+			}
+
+			return c.JSON(http.StatusOK, res)
+		},
+	)
 }

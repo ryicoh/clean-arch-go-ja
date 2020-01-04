@@ -10,7 +10,7 @@ import (
 	"github.com/ryicoh/clean-arch/internal/infrastructure/web/echo"
 	"github.com/ryicoh/clean-arch/internal/interface/controller"
 	"github.com/ryicoh/clean-arch/internal/interface/repository"
-	"github.com/ryicoh/clean-arch/internal/interface/route"
+	"github.com/ryicoh/clean-arch/internal/interface/web/route"
 	"github.com/ryicoh/clean-arch/internal/usecase"
 )
 

@@ -1,6 +1,11 @@
 package web
 
-import "github.com/ryicoh/clean-arch/internal/infrastructure/conf"
+import (
+	"mime/multipart"
+	"net/http"
+
+	"github.com/ryicoh/clean-arch/internal/infrastructure/conf"
+)
 
 type (
 	Server interface {
@@ -15,10 +20,13 @@ type (
 		POST(path string, handler Handler)
 	}
 
-	Handler func(Context) (code int, data interface{}, errr error)
+	Handler func(Context) (code int, data interface{}, err error)
 
 	Context interface {
 		GetConfig() conf.Config
-		GetQueryOffset() (int, error)
+		GetQueryParam(query string) string
+		GetRequest() *http.Request
+		GetMultipartForm() (*multipart.Form, error)
+		Bind(i interface{}) error
 	}
 )
