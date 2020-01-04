@@ -28,7 +28,7 @@ type (
 		GetRequest() *http.Request
 		GetMultipartForm() (*multipart.Form, error)
 		Bind(i interface{}) error
-		GetSession(key string) (string, error)
-		SetSession(key, value string) error
+		GetSessionValue(key string) (string, error)
+		SetSessionValue(key, value string) error
 	}
 )

@@ -36,7 +36,7 @@ func (c *context) GetMultipartForm() (*multipart.Form, error) {
 	return c.ctx.MultipartForm()
 }
 
-func (c *context) GetSession(key string) (string, error) {
+func (c *context) GetSessionValue(key string) (string, error) {
 	sess := session.Default(c.ctx)
 	v := sess.Get(key)
 
@@ -47,7 +47,7 @@ func (c *context) GetSession(key string) (string, error) {
 	return cast.ToString(v), nil
 }
 
-func (c *context) SetSession(key, value string) error {
+func (c *context) SetSessionValue(key, value string) error {
 	sess := session.Default(c.ctx)
 	sess.Set(key, value)
 

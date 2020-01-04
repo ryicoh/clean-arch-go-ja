@@ -23,6 +23,8 @@ type (
 
 		GetRequest() *http.Request
 		GetMultipartForm() (*multipart.Form, error)
+		GetSesstionUserUID() (string, error)
+		SetSesstionUserUID(uid string) error
 	}
 
 	context struct {
@@ -36,6 +38,14 @@ func New(ctx web.Context) Context {
 }
 
 func (c *context) BindAndValidate(i interface{}) error {
+	return nil
+}
+
+func (c *context) Valudate(i interface{}) error {
+	return nil
+}
+
+func (c *context) BindFile(i interface{}) error {
 	return nil
 }
 
@@ -53,4 +63,12 @@ func (c *context) GetMultipartForm() (*multipart.Form, error) {
 
 func (c *context) ValidateAndGetErrorFields(i interface{}) ([]*ErrorField, error) {
 	return nil, nil
+}
+
+func (c *context) GetSesstionUserUID() (string, error) {
+	return c.ctx.GetSessionValue("UserUID")
+}
+
+func (c *context) SetSesstionUserUID(uid string) error {
+	return c.ctx.SetSessionValue("UserUID", uid)
 }

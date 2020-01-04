@@ -36,7 +36,7 @@ func (c *context) GetMultipartForm() (*multipart.Form, error) {
 	return c.ctx.MultipartForm()
 }
 
-func (c *context) GetSession(key string) (string, error) {
+func (c *context) GetSessionValue(key string) (string, error) {
 	sess, err := session.Get("session", c.ctx)
 	if err != nil {
 		return "", err
@@ -46,7 +46,7 @@ func (c *context) GetSession(key string) (string, error) {
 	return cast.ToString(v), nil
 }
 
-func (c *context) SetSession(key, value string) error {
+func (c *context) SetSessionValue(key, value string) error {
 	sess, _ := session.Get("session", c.ctx)
 
 	sess.Options = &sessions.Options{
@@ -56,8 +56,7 @@ func (c *context) SetSession(key, value string) error {
 	}
 	sess.Values[key] = value
 
-	err := sess.Save(c.GetRequest(), c.ctx.Response())
-	if err != nil {
+	if err := sess.Save(c.GetRequest(), c.ctx.Response()); err != nil {
 		return err
 	}
 
