@@ -1,12 +1,12 @@
-package echo
+package echov4
 
 import (
-	"fmt"
 	"mime/multipart"
 	"net/http"
 
-	session "github.com/ipfans/echo-session"
-	"github.com/labstack/echo"
+	"github.com/gorilla/sessions"
+	"github.com/labstack/echo-contrib/session"
+	"github.com/labstack/echo/v4"
 	"github.com/ryicoh/clean-arch/internal/infrastructure/conf"
 	"github.com/spf13/cast"
 )
@@ -37,21 +37,27 @@ func (c *context) GetMultipartForm() (*multipart.Form, error) {
 }
 
 func (c *context) GetSession(key string) (string, error) {
-	sess := session.Default(c.ctx)
-	v := sess.Get(key)
-
-	if v == nil {
-		return "", fmt.Errorf("%q session not found", key)
+	sess, err := session.Get("session", c.ctx)
+	if err != nil {
+		return "", err
 	}
 
+	v := sess.Values[key]
 	return cast.ToString(v), nil
 }
 
 func (c *context) SetSession(key, value string) error {
-	sess := session.Default(c.ctx)
-	sess.Set(key, value)
+	sess, _ := session.Get("session", c.ctx)
 
-	if err := sess.Save(); err != nil {
+	sess.Options = &sessions.Options{
+		Path:     "/",
+		MaxAge:   60 * 60 * 24 * 365,
+		HttpOnly: true,
+	}
+	sess.Values[key] = value
+
+	err := sess.Save(c.GetRequest(), c.ctx.Response())
+	if err != nil {
 		return err
 	}
 
