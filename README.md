@@ -60,3 +60,9 @@
 │   └── usecase  #  ビジネスルールをかく
 │       └── user_usecase.go
 ```
+
+# 起動
+
+```
+$ make
+```
