@@ -4,11 +4,10 @@ import (
 	session "github.com/ipfans/echo-session"
 	"github.com/labstack/echo"
 	"github.com/ryicoh/clean-arch/internal/infrastructure/conf"
-	"github.com/ryicoh/clean-arch/internal/infrastructure/conf/env"
 )
 
 func newSessionMiddleware(cnf conf.Config) (echo.MiddlewareFunc, error) {
-	redisConfing := env.New().GetRedisConfig()
+	redisConfing := cnf.GetRedisConfig()
 	store, err := session.NewRedisStore(
 		32, "tcp",
 		redisConfing.Host+":"+redisConfing.Port,

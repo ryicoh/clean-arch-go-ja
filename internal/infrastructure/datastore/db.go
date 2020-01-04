@@ -1,8 +1,6 @@
 package datastore
 
-import (
-	"github.com/ryicoh/clean-arch/internal/infrastructure/conf/env"
-)
+import "github.com/ryicoh/clean-arch/internal/infrastructure/conf/yaml"
 
 type (
 	DBConfig struct {
@@ -21,7 +19,7 @@ type (
 )
 
 func NewDBConfigFromENV() *DBConfig {
-	cnf := env.New().GetDatabaseConfig()
+	cnf := yaml.New().GetDatabaseConfig()
 
 	return &DBConfig{
 		Host:     cnf.Host,
