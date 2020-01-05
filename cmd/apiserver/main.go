@@ -2,36 +2,23 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/ryicoh/clean-arch/internal/infrastructure/conf/yaml"
-	"github.com/ryicoh/clean-arch/internal/infrastructure/datastore"
-	"github.com/ryicoh/clean-arch/internal/infrastructure/datastore/gorm"
-	"github.com/ryicoh/clean-arch/internal/infrastructure/web/echo"
-	"github.com/ryicoh/clean-arch/internal/interface/controller"
-	"github.com/ryicoh/clean-arch/internal/interface/repository"
-	"github.com/ryicoh/clean-arch/internal/interface/web/route"
-	"github.com/ryicoh/clean-arch/internal/usecase"
+	"github.com/ryicoh/clean-arch/internal/infrastructure/cmd/apiserver"
 )
 
 func main() {
-	cnf := yaml.New()
-	s := echo.NewServer(cnf)
-	db, err := gorm.New(datastore.NewDBConfigFromENV())
-	if err != nil {
+	c := apiserver.NewContainer()
+	if err := c.Build(); err != nil {
 		fmt.Println(err)
-		return
+		os.Exit(1)
 	}
 
-	userRepository := repository.NewUserRepository(db)
-	userUsecase := usecase.NewUserUsecase(userRepository)
-	userController := controller.NewUserController(userUsecase)
-	appController := controller.NewAppController(userController)
-
-	route.Register(s, appController)
-
-	err = s.Start(cnf.GetPort())
-	if err != nil {
+	if err := c.Run(); err != nil {
 		fmt.Println(err)
+		os.Exit(1)
 	}
+
+	return
 }
