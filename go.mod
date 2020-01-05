@@ -20,6 +20,5 @@ require (
 	github.com/labstack/gommon v0.3.0 // indirect
 	github.com/spf13/cast v1.3.0
 	github.com/spf13/viper v1.6.1
-	go.uber.org/dig v1.8.0
 	gopkg.in/boj/redistore.v1 v1.0.0-20160128113310-fc113767cd6b
 )

@@ -12,7 +12,7 @@ type database struct {
 }
 
 // New defines ...
-func NewDatabase(c *datastore.DBConfig) (datastore.DB, error) {
+func New(c *datastore.DBConfig) (datastore.DB, error) {
 	conn, err := gorm.Open(
 		"mysql",
 		fmt.Sprintf(
