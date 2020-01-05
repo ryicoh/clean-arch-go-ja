@@ -8,3 +8,6 @@ run-apiserver:
 
 run-db:
 	docker-compose up
+
+db-migrate:
+	go run ./cmd/db-migrate/main.go
