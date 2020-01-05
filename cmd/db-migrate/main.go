@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	db, err := gorm.New(datastore.NewDBConfigFromENV())
+	db, err := gorm.NewDatabase(datastore.NewDBConfigFromENV())
 	if err != nil {
 		fmt.Println(err)
 		return
