@@ -3,7 +3,7 @@ package controller
 import (
 	"net/http"
 
-	"github.com/ryicoh/clean-arch/internal/interface/web/appcontext"
+	"github.com/ryicoh/clean-arch/internal/adapter/web/appcontext"
 	"github.com/ryicoh/clean-arch/internal/usecase"
 )
 

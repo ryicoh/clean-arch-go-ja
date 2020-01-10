@@ -7,7 +7,7 @@ import (
 
 	session "github.com/ipfans/echo-session"
 	"github.com/labstack/echo"
-	"github.com/ryicoh/clean-arch/internal/infrastructure/conf"
+	"github.com/ryicoh/clean-arch/internal/adapter/interface/conf"
 	"github.com/spf13/cast"
 )
 

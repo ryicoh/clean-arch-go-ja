@@ -1,9 +1,9 @@
 package route
 
 import (
+	"github.com/ryicoh/clean-arch/internal/adapter/web/appcontext"
+	"github.com/ryicoh/clean-arch/internal/adapter/web/controller"
 	"github.com/ryicoh/clean-arch/internal/infrastructure/web"
-	"github.com/ryicoh/clean-arch/internal/interface/controller"
-	"github.com/ryicoh/clean-arch/internal/interface/web/appcontext"
 )
 
 type (

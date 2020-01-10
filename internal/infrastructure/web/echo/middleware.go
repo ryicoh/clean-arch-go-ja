@@ -3,7 +3,7 @@ package echo
 import (
 	session "github.com/ipfans/echo-session"
 	"github.com/labstack/echo"
-	"github.com/ryicoh/clean-arch/internal/infrastructure/conf"
+	"github.com/ryicoh/clean-arch/internal/adapter/interface/conf"
 )
 
 func newSessionMiddleware(cnf conf.Config) (echo.MiddlewareFunc, error) {

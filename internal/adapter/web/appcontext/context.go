@@ -4,7 +4,7 @@ import (
 	"mime/multipart"
 	"net/http"
 
-	"github.com/ryicoh/clean-arch/internal/infrastructure/web"
+	"github.com/ryicoh/clean-arch/internal/adapter/interface/web"
 )
 
 type (

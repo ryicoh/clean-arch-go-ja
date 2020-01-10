@@ -3,7 +3,7 @@ package echov4
 import (
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
-	"github.com/ryicoh/clean-arch/internal/infrastructure/conf"
+	"github.com/ryicoh/clean-arch/internal/adapter/interface/conf"
 	"gopkg.in/boj/redistore.v1"
 )
 

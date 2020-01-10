@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/jinzhu/gorm"
-	"github.com/ryicoh/clean-arch/internal/infrastructure/datastore"
+	"github.com/ryicoh/clean-arch/internal/adapter/interface/datastore"
 )
 
 type database struct {
@@ -33,6 +33,14 @@ func New(c *datastore.DBConfig) (datastore.DB, error) {
 
 func (d *database) AutoMigrate(i ...interface{}) datastore.DB {
 	return &database{d.db.AutoMigrate(i...)}
+}
+
+func (d *database) Limit(limit int) datastore.DB {
+	return &database{d.db.Limit(limit)}
+}
+
+func (d *database) Offset(offset int) datastore.DB {
+	return &database{d.db.Limit(offset)}
 }
 
 func (d *database) Find(i interface{}) datastore.DB {

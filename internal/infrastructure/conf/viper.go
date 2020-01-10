@@ -1,9 +1,9 @@
-package yaml
+package conf
 
 import (
 	"fmt"
 
-	"github.com/ryicoh/clean-arch/internal/infrastructure/conf"
+	"github.com/ryicoh/clean-arch/internal/adapter/interface/conf"
 	"github.com/spf13/viper"
 )
 

@@ -6,8 +6,8 @@ import (
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	"github.com/ryicoh/clean-arch/internal/infrastructure/conf"
-	"github.com/ryicoh/clean-arch/internal/infrastructure/web"
+	"github.com/ryicoh/clean-arch/internal/adapter/interface/conf"
+	"github.com/ryicoh/clean-arch/internal/adapter/interface/web"
 )
 
 type server struct {

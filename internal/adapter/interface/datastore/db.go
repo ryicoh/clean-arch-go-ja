@@ -1,6 +1,6 @@
 package datastore
 
-import "github.com/ryicoh/clean-arch/internal/infrastructure/conf/yaml"
+import "github.com/ryicoh/clean-arch/internal/adapter/interface/conf"
 
 type (
 	DBConfig struct {
@@ -13,14 +13,14 @@ type (
 
 	DB interface {
 		AutoMigrate(...interface{}) DB
+		Limit(int) DB
+		Offset(int) DB
 		Find(interface{}) DB
 		Error() error
 	}
 )
 
-func NewDBConfigFromENV() *DBConfig {
-	cnf := yaml.New().GetDatabaseConfig()
-
+func NewDBConfigFromConfig(cnf conf.DatabaseConfig) *DBConfig {
 	return &DBConfig{
 		Host:     cnf.Host,
 		User:     cnf.User,

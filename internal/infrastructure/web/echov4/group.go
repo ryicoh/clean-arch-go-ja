@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/ryicoh/clean-arch/internal/infrastructure/web"
+	"github.com/ryicoh/clean-arch/internal/adapter/interface/web"
 )
 
 type group struct {
