@@ -1,14 +1,25 @@
-package gorm
+package datastore
 
 import (
 	"fmt"
 
 	"github.com/jinzhu/gorm"
+	"github.com/ryicoh/clean-arch/internal/adapter/interface/conf"
 	"github.com/ryicoh/clean-arch/internal/adapter/interface/datastore"
 )
 
 type database struct {
 	db *gorm.DB
+}
+
+func NewDBConfigFromConfig(cnf conf.DatabaseConfig) *datastore.DBConfig {
+	return &datastore.DBConfig{
+		Host:     cnf.Host,
+		User:     cnf.User,
+		Password: cnf.Password,
+		Name:     cnf.Name,
+		Protocol: cnf.Protocol,
+	}
 }
 
 // New defines ...

@@ -13,11 +13,11 @@ type (
 	}
 
 	userController struct {
-		userUsecase usecase.UserUsecase
+		userUsecase *usecase.UserUsecase
 	}
 )
 
-func NewUserController(userUsecase usecase.UserUsecase) UserController {
+func NewUserController(userUsecase *usecase.UserUsecase) UserController {
 	return &userController{userUsecase: userUsecase}
 }
 

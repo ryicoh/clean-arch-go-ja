@@ -4,20 +4,20 @@ import (
 	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/ryicoh/clean-arch/internal/infrastructure/conf/yaml"
+	"github.com/ryicoh/clean-arch/internal/adapter/repository"
+	"github.com/ryicoh/clean-arch/internal/adapter/web/controller"
+	"github.com/ryicoh/clean-arch/internal/adapter/web/route"
+	"github.com/ryicoh/clean-arch/internal/infrastructure/conf"
 	"github.com/ryicoh/clean-arch/internal/infrastructure/datastore"
-	"github.com/ryicoh/clean-arch/internal/infrastructure/datastore/gorm"
 	"github.com/ryicoh/clean-arch/internal/infrastructure/web/echo"
-	"github.com/ryicoh/clean-arch/internal/interface/controller"
-	"github.com/ryicoh/clean-arch/internal/interface/repository"
-	"github.com/ryicoh/clean-arch/internal/interface/web/route"
 	"github.com/ryicoh/clean-arch/internal/usecase"
 )
 
 func main() {
-	cnf := yaml.New()
+	cnf := conf.New()
 	s := echo.NewServer(cnf)
-	db, err := gorm.New(datastore.NewDBConfigFromENV())
+	dbCnf := datastore.NewDBConfigFromConfig(cnf.GetDatabaseConfig())
+	db, err := datastore.New(dbCnf)
 	if err != nil {
 		fmt.Println(err)
 		return
